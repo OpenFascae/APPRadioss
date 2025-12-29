@@ -1,0 +1,47 @@
+﻿/**********************************************************************
+ * @file   FITKRadiossDataProbeSectionAdaptor.h
+ * @brief  探针截面适配器
+ * @author guqingtao (15598887859@163.com)
+ * @date   2025-11-10
+ *********************************************************************/
+#ifndef FITKRadiossDataProbeSectionAdaptor_H
+#define FITKRadiossDataProbeSectionAdaptor_H
+
+#include "FITKRadiossDataHDF5Adaptor.h"
+#include "FITKRadiossDataIOHDF5API.h"
+#include "FITK_Kernel/FITKAdaptor/FITKIOAdaptorFactory.h"
+
+namespace Radioss
+{
+    class FITKProbeSection;
+}
+namespace Interface
+{
+    /**
+     * @brief  探针 截面适配器
+     * @author guqingtao (15598887859@163.com)
+     * @date   2025-11-10
+     */
+    class FITKRadiossDataIOHDF5API FITKRadiossDataProbeSectionAdaptor : public FITKRadiossDataHDF5Adaptor
+    {
+    public:
+        explicit FITKRadiossDataProbeSectionAdaptor() = default;
+        ~FITKRadiossDataProbeSectionAdaptor() = default;
+
+        virtual bool adaptR() override;
+        virtual bool adaptW() override;
+    private:
+
+    private:
+        /**
+         * @brief  探针 截面数据
+         * @author guqingtao (15598887859@163.com)
+         * @date   2025-11-10
+         */
+        Radioss::FITKProbeSection* _data{};
+    };
+    Register2FITKIOAdaptorFactory(HDF5, Radioss::FITKProbeSection, FITKRadiossDataProbeSectionAdaptor)
+}
+
+#endif 
+

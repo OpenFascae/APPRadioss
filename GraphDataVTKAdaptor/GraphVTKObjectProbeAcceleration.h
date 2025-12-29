@@ -1,0 +1,117 @@
+﻿/**********************************************************************
+ * @file   GraphVTKObjectProbeAcceleration.h
+ * @brief  加速度探针可视化对象
+ * @author ZhouZhaoYi (zhouzhaoyi@diso.cn)
+ * @date   2025-12-04
+ *********************************************************************/
+#ifndef _GraphVTKObjectProbeAcceleration_H__
+#define _GraphVTKObjectProbeAcceleration_H__
+
+#include "GraphDataVTKAdaptorAPI.h"
+#include "GraphVTKObjectModelBase.h"
+
+class vtkUnstructuredGrid;
+class RadiossVTKGraphActor;
+namespace Radioss
+{
+    class FITKProbeAcceleration;
+}
+namespace Exchange
+{
+    /**
+     * @brief  加速度探针可视化对象
+     * @author ZhouZhaoYi (zhouzhaoyi@diso.cn)
+     * @date   2025-12-04
+     */
+    class GraphDataVTKAdaptorAPI GraphVTKObjectProbeAcceleration : public GraphVTKObjectModelBase
+    {
+        // Regist
+        FITKGraphObjectRegist(GraphVTKObjectProbeAcceleration, GraphVTKObjectModelBase);
+        FITKCLASS(Exchange, GraphVTKObjectProbeAcceleration);
+    public:
+        /**
+         * @brief  构造函数
+         * @author ZhouZhaoYi (zhouzhaoyi@diso.cn)
+         * @date   2025-09-05
+         */
+        GraphVTKObjectProbeAcceleration(Radioss::FITKProbeAcceleration* dataObj);
+        /**
+         * @brief  析构函数
+         * @author ZhouZhaoYi (zhouzhaoyi@diso.cn)
+         * @date   2025-09-05
+         */
+        virtual ~GraphVTKObjectProbeAcceleration();
+        /**
+         * @brief  更新场颜色
+         * @author ZhouZhaoYi (zhouzhaoyi@diso.cn)
+         * @date   2025-09-05
+         */
+        void updateModelColor(QColor color) override;
+        /**
+         * @brief    获取数据可见
+         * @return   bool 是否可见
+         * @author   ZhouZhaoYi (zhouzhaoyi@diso.cn)
+         * @date     2025-09-23
+         */
+        virtual bool getVisibility() override;
+
+        /**
+         * @brief  更新可见
+         * @author ZhouZhaoYi (zhouzhaoyi@diso.cn)
+         * @date   2025-09-23
+         */
+        virtual void updateVisibility() override;
+        /**
+         * @brief    显示隐藏
+         * @param[i] visibility
+         * @return   void
+         * @author   ZhouZhaoYi (zhouzhaoyi@diso.cn)
+         * @date     2025-09-25
+         */
+        virtual void setVisible(bool visibility) override;
+        /**
+         * @brief    更新
+         * @param[i] forceUpdate
+         * @return   void
+         * @author   ZhouZhaoYi (zhouzhaoyi@diso.cn)
+         * @date     2025-09-29
+         */
+        virtual void update(bool forceUpdate = false) override;
+    private:
+        /**
+         * @brief    初始化
+         * @author ZhouZhaoYi (zhouzhaoyi@diso.cn)
+         * @date   2025-09-05
+         */
+        void init();
+        /**
+         * @brief    生成渲染数据
+         * @return   bool               是否成功
+         * @author ZhouZhaoYi (zhouzhaoyi@diso.cn)
+         * @date   2025-09-05
+         */
+        bool generateDataSet();
+        /**
+         * @brief    生成渲染对象
+         * @author ZhouZhaoYi (zhouzhaoyi@diso.cn)
+         * @date   2025-09-05
+         */
+        void generateGraph();
+
+    private:
+        /**
+         * @brief  渲染数据
+         * @author ZhouZhaoYi (zhouzhaoyi@diso.cn)
+         * @date   2025-09-05
+         */
+        vtkUnstructuredGrid* _grid = nullptr;
+        /**
+         * @brief  演员
+         * @author ZhouZhaoYi (zhouzhaoyi@diso.cn)
+         * @date   2025-09-05
+         */
+        RadiossVTKGraphActor* _actor{ nullptr };
+    };
+}
+
+#endif // !_GraphVTKObjectProbeAcceleration_H__

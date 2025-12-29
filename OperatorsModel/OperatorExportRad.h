@@ -1,0 +1,46 @@
+﻿#ifndef _OperatorExportRad_H_
+#define _OperatorExportRad_H_
+
+
+#include "FITK_Kernel/FITKCore/FITKActionOperator.h"
+#include "FITK_Kernel/FITKCore/FITKOperatorRepo.h"
+
+namespace ModelOper
+{
+    class FITKOperatorExportRad : public Core::FITKActionOperator
+    {
+        Q_OBJECT
+    public:
+        explicit FITKOperatorExportRad() = default;
+        virtual ~FITKOperatorExportRad() = default;
+        /**
+         * @brief    执行界面操作
+         * @return true     执行成功
+         * @return false     执行失败        
+         * @author   guqingtao (15598887859@163.com)
+         * @date     2025-06-30
+         */
+         virtual bool execGUI() override;
+         /**
+          * @brief    执行写出操作
+          * @return   bool
+          * @author   guqingtao (15598887859@163.com)
+          * @date     2025-06-30
+          */
+         virtual bool execProfession() override;
+ 
+    private slots:
+        /**
+         * @brief  线程结束槽函数
+         * @author guqingtao (15598887859@163.com)
+         * @date   2025-06-30
+         */
+        void ioThreadFinishedSlot();
+ 
+    };
+    
+    // 按钮注册相关操作
+    Register2FITKOperatorRepo(actionExportRad, FITKOperatorExportRad);
+}
+
+#endif

@@ -1,0 +1,104 @@
+﻿#include "GUIEOSPolynomialDialog.h"
+#include "ui_GUIEOSDialog.h"
+#include "FITK_Component/FITKRadiossData/FITKEquationOfStatePolynomial.h"
+
+#include <QMessageBox>
+
+namespace GUI
+{
+    GUIEOSPolynomialDialog::GUIEOSPolynomialDialog(Radioss::FITKAbstractEquationOfState* obj, Core::FITKActionOperator* oper, QWidget* parent)
+        : GUIEOSDialog(obj, oper, parent)
+    {
+        QString EOSName;
+        _oper->argValue("EOSName", EOSName);
+        if (!_obj) {
+            _ui->lineEdit_name->setReadOnly(true);
+            _obj = new Radioss::FITKEquationOfStatePolynomial();
+            _obj->setDataObjectName(EOSName);
+            setWindowTitle(tr("Create EOS"));
+        }
+        else
+            setWindowTitle(tr("Edit EOS"));
+
+        this->init();
+    }
+    void GUIEOSPolynomialDialog::init()
+    {
+        //初始化表格
+        QStringList headerLabels;
+        headerLabels << "C0" << "C1" << "C2" << "C3" << "C4" << "C5" << "E0" << "Psh"<< "RHO_0";
+        this->createTable(headerLabels);
+        Radioss::FITKEquationOfStatePolynomial* eosPoly = dynamic_cast<Radioss::FITKEquationOfStatePolynomial*>(_obj);
+        if (!eosPoly) return;
+        //设置名称类型
+        _ui->lineEditType->setReadOnly(true);
+        _ui->lineEdit_name->setText(eosPoly->getDataObjectName());
+        _ui->lineEditType->setText("/EOS/POLYNOMIAL(Polynomial)");
+
+        //设置参数
+        this->setItemValueByVarName("C0", eosPoly->getC0());
+        this->setItemValueByVarName("C1", eosPoly->getC1());
+        this->setItemValueByVarName("C2", eosPoly->getC2());
+        this->setItemValueByVarName("C3", eosPoly->getC3());
+        this->setItemValueByVarName("C4", eosPoly->getC4());
+        this->setItemValueByVarName("C5", eosPoly->getC5());
+        this->setItemValueByVarName("E0", eosPoly->getE0());
+        this->setItemValueByVarName("Psh", eosPoly->getPsh());
+        this->setItemValueByVarName("RHO_0", eosPoly->getP0());
+
+        //调整列宽
+        _ui->tableWidget->resizeColumnsToContents();
+        for (int i = 0; i < _ui->tableWidget->columnCount(); ++i)
+        {
+            int currentWidth = _ui->tableWidget->columnWidth(i);
+            if (currentWidth < 60) 
+                _ui->tableWidget->setColumnWidth(i, 60);
+            else if (currentWidth > 100)
+                _ui->tableWidget->setColumnWidth(i, 100);
+        }
+    }
+    bool GUIEOSPolynomialDialog::ckeckData()
+    {
+        if(!_EOSMgr||!_obj)return false;
+        //检查数据合法性
+        bool ok = false;
+        QStringList headerLabels;
+        headerLabels << "C0" << "C1" << "C2" << "C3" << "C4" << "C5" << "E0" << "Psh" << "RHO_0";
+        for (int i = 0; i < headerLabels.size();++i)
+        {
+            double value = this->getItemValueByVarName(headerLabels[i], &ok);
+            if (!ok){
+                QMessageBox::warning(this, "", tr("Please input a valid number for %1.").arg(headerLabels[i]), QMessageBox::Ok);
+                return false;
+            }
+        }
+        //检查名称
+        QString name = _ui->lineEdit_name->text();
+        if (name.isEmpty()) {
+            QMessageBox::warning(this, "", tr("Name cannot be empty."), QMessageBox::Ok);
+            return false;
+        }
+        else if (_EOSMgr->getDataByName(name) && name != _obj->getDataObjectName()) {
+            QMessageBox::warning(this, "", tr("\"%1\" The name already exists").arg(name), QMessageBox::Ok);
+            return false;
+        }
+        return true;
+
+    }
+    void GUIEOSPolynomialDialog::getDataFormWidget()
+    {
+        Radioss::FITKEquationOfStatePolynomial* eosPoly = dynamic_cast<Radioss::FITKEquationOfStatePolynomial*>(_obj);
+        if (!eosPoly) return;
+
+        //设置参数
+        eosPoly->setC0(this->getItemValueByVarName("C0"));
+        eosPoly->setC1(this->getItemValueByVarName("C1"));
+        eosPoly->setC2(this->getItemValueByVarName("C2"));
+        eosPoly->setC3(this->getItemValueByVarName("C3"));
+        eosPoly->setC4(this->getItemValueByVarName("C4"));
+        eosPoly->setC5(this->getItemValueByVarName("C5"));
+        eosPoly->setE0(this->getItemValueByVarName("E0"));
+        eosPoly->setPsh(this->getItemValueByVarName("Psh"));
+        eosPoly->setP0(this->getItemValueByVarName("RHO_0"));
+    }
+}
