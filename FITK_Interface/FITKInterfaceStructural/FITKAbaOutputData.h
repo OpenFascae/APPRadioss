@@ -1,4 +1,12 @@
-﻿/**
+﻿/*
+ * Copyright (c) 2020-2026, Qingdao Digital Intelligent Ship & Ocean Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * This file is part of FastCAE and is distributed under the terms of the
+ * BSD 3-Clause License. See the LICENSE file in the project root for details.
+ */
+
+/**
  * 
  * @file   FITKAbaOutputData.h
  * @brief  输出数据，包含输出中需要定义的基本字段

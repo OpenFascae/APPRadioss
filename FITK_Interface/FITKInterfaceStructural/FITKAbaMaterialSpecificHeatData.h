@@ -1,4 +1,12 @@
-﻿/**
+﻿/*
+ * Copyright (c) 2020-2026, Qingdao Digital Intelligent Ship & Ocean Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * This file is part of FastCAE and is distributed under the terms of the
+ * BSD 3-Clause License. See the LICENSE file in the project root for details.
+ */
+
+/**
  * @file FITKAbaMaterialSpecificHeatData.h
  * @brief 材料比热容数据管理类头文件
  * @details 该文件定义了用于管理材料比热容数据的类，包括温度相关的比热容属性设置与获取

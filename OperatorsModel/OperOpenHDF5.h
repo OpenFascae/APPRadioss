@@ -1,4 +1,12 @@
-﻿/**********************************************************************
+﻿/*
+ * Copyright (c) 2020-2026, Qingdao Digital Intelligent Ship & Ocean Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * This file is part of FastCAE and is distributed under the terms of the
+ * BSD 3-Clause License. See the LICENSE file in the project root for details.
+ */
+
+/**********************************************************************
  * @file   OperOpenHDF5.h
  * @brief  导入工程文件文件操作器
  * @author guqingtao (15598887859@163.com)

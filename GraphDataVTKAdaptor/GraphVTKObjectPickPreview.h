@@ -1,4 +1,12 @@
-﻿/**********************************************************************
+﻿/*
+ * Copyright (c) 2020-2026, Qingdao Digital Intelligent Ship & Ocean Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * This file is part of FastCAE and is distributed under the terms of the
+ * BSD 3-Clause License. See the LICENSE file in the project root for details.
+ */
+
+/**********************************************************************
  * @file   GraphVTKObjectPickPreview.h
  * @brief  拾取模型预选渲染对象
  * @author BaGuijun (baguijun@163.com)

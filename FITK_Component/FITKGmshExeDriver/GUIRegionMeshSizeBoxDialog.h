@@ -1,4 +1,12 @@
-﻿/**********************************************************************
+﻿/*
+ * Copyright (c) 2020-2026, Qingdao Digital Intelligent Ship & Ocean Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * This file is part of FastCAE and is distributed under the terms of the
+ * BSD 3-Clause License. See the LICENSE file in the project root for details.
+ */
+
+/**********************************************************************
  * @file   GUIRegionMeshSizeBoxDialog.h
  * @brief  长方体区域网格
  * @author guqingtao (15598887859@163.com)

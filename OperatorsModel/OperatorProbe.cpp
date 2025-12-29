@@ -1,4 +1,12 @@
-﻿#include "OperatorProbe.h"
+﻿/*
+ * Copyright (c) 2020-2026, Qingdao Digital Intelligent Ship & Ocean Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * This file is part of FastCAE and is distributed under the terms of the
+ * BSD 3-Clause License. See the LICENSE file in the project root for details.
+ */
+
+#include "OperatorProbe.h"
 #include "GUIDialog/GUIAnalysisDialog/GUIAccelDialog.h"
 #include "GUIDialog/GUIAnalysisDialog/GUISectionDialog.h"
 #include "FITK_Component/FITKRadiossData/FITKRadiossCase.h"

@@ -1,4 +1,12 @@
-﻿/**
+﻿/*
+ * Copyright (c) 2020-2026, Qingdao Digital Intelligent Ship & Ocean Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * This file is part of FastCAE and is distributed under the terms of the
+ * BSD 3-Clause License. See the LICENSE file in the project root for details.
+ */
+
+/**
  * @file FITKAbaMaterialConductivity.h
  * @brief 材料导热系数属性管理类头文件
  * @details 该文件定义了用于管理材料导热系数属性的类，支持温度相关的各向同性导热系数数据管理
